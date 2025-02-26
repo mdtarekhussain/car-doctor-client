@@ -3,7 +3,7 @@ import svg from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import AuthContext from "../../Private/AuthProvider";
 import Swal from "sweetalert2";
-import axios from "axios";
+// import axios from "axios";
 const Login = () => {
   const { login } = useContext(AuthContext);
   const location = useLocation();
@@ -17,28 +17,28 @@ const Login = () => {
     login(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        const user = { email };
+        // const user = { email };
 
         console.log("✅ Logged In User:", loggedUser); // Debugging
 
         if (result.user.email) {
-          axios
-            .post("http://localhost:5000/jwt", user, {
-              withCredentials: true,
-            })
-            .then((res) => {
-              console.log("🎯 JWT Response:", res.data);
+          Swal.fire({
+            icon: "success",
+            title: "Login success",
+            text: "You are successfully logged in!",
+          });
+          navigate(location?.state ? location?.state : "/");
+          // axios
+          //   .post("http://localhost:5000/jwt", user, {
+          //     withCredentials: true,
+          //   })
+          //   .then((res) => {
+          //     console.log("🎯 JWT Response:", res.data);
 
-              if (res.data.success) {
-                Swal.fire({
-                  icon: "success",
-                  title: "Login success",
-                  text: "You are successfully logged in!",
-                });
+          //     if (res.data.success) {
 
-                navigate(location?.state ? location?.state : "/");
-              }
-            });
+          //     }
+          //   });
         }
       })
       .catch((error) => {

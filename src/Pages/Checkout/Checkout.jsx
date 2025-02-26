@@ -1,4 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import img1 from "../.././assets/images/checkout/checkout.png";
 import { useContext } from "react";
 import AuthContext from "../../Private/AuthProvider";
@@ -7,6 +8,8 @@ const Checkout = () => {
   const services = useLoaderData();
   const { title, _id, price, img } = services;
   const { user } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -42,6 +45,9 @@ const Checkout = () => {
             title: "Booking success",
             text: "Your booking has been confirmed!",
           });
+          if (data.acknowledged === true) {
+            navigate(location?.state ? location?.state : "/");
+          }
         }
       });
   };
