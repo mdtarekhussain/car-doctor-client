@@ -7,7 +7,8 @@ import { GoArrowRight } from "react-icons/go";
 import { Link, useParams } from "react-router-dom";
 
 const ServiceDetails = () => {
-  const { id } = useParams();
+  const { id, price } = useParams();
+  console.log(price);
 
   return (
     <div className="mt-10">
@@ -254,14 +255,13 @@ const ServiceDetails = () => {
             </div>
           </div>
           <div className="mt-6">
-            <h1 className="text-[35px] font-bold text-black">Price $250.00</h1>
+            <h1 className="text-[35px] font-bold text-black">Price ${price}</h1>
             <Link to={`/checkout/${id}`}>
               <button className="w-full bg-[#FF3811] rounded-[5px] text-[18px] font-bold text-white   mt-3 py-2 text-center">
                 Proceed Checkout
               </button>
             </Link>
           </div>
-          <h1>Hello</h1>
         </div>
       </div>
     </div>
